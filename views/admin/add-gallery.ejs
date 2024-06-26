@@ -1,0 +1,24 @@
+<script src="/static/js/gallery.js"></script>
+<a href="/admin/gallery" class="nav-link text-decoration-none text-dark fs-4 ms-4">
+    <img src="/static/img/left-arrow.png" class="me-2" height="20px" width="20px">Add Gallery</a>
+<div class="container-fluid ms-3 mt-2">
+   <div class="mt-3 col-md-6">
+    <label for="school_image" class="col-form-label">Upload Image</label>
+    <div class="border upload-box ">
+        <div class="raleway-regular upload-imgbox img" id="school_image_preview" style=" justify-content:center;">
+        </div>
+        <div> <input type="file" class="form-control" id="school_image">
+            <div class="text-center">
+                <label for="school_image" class="col-form-label cursor-pointer"
+                    style=" justify-content:center;">
+                    <img src="/static/img/upload.jpg" class="d-block mx-auto" height="50px" width="50px"><b>Click To Upload Image</b>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class=" w-50 d-flex justify-content-end mt-2">
+        <button type="submit" id="add_gallery" class="btn btn_bg_color text-white submit-button"  data-id="<%=token.school_id; %>">Submit</button>
+        <button type="submit" class="btn btn-success text-white waiting-button d-none">Please Wait</button>
+    </div>
+</div>

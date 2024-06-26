@@ -1,0 +1,18 @@
+<script src="/static/js/fee-structure.js"></script>
+<script src="/static/vendor/tinymce/tinymce.min.js"></script>
+<div class="container-fluid ms-3 mt-5">
+    <h6 class=" text-dark fs-4 ms-1 mt-2">Fee Structure</h6>
+        <div class="col-md-6">
+            <label for="title" class="col-form-label">Title</label>
+            <input type="text" class="form-control" id="title" value="<%= feeStructureList?feeStructureList.title:'' %>"
+                placeholder="Enter title">
+        </div>
+        <div class="mt-3 col-md-6">
+            <label for="school_fee" class="col-form-label">Fees</label>
+            <textarea class="tinymce" id="school_fee" rows="10"><%= feeStructureList?feeStructureList.fees:'' %></textarea>
+        </div>
+    <div class="w-50 mt-2 d-md-flex justify-content-md-end">
+        <button type="submit" id="add_fee_structure" data-id="<%=token.school_id; %>" class="btn btn_bg_color text-white submit-button">Submit</button>
+        <button type="submit" class="btn btn-success  waiting-button text-white d-none">Please Wait</button>
+    </div>
+</div>

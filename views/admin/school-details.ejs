@@ -1,0 +1,258 @@
+<script src="/static/js/about-us.js"></script>
+<script src="/static/js/facilities.js"></script>
+<script src="/static/js/gallery.js"></script>
+<script src="/static/js/fee-structure.js"></script>
+<script src="/static/js/testimonials.js"></script>
+<script src="/static/vendor/tinymce/tinymce.min.js" ></script>
+<a href="/admin/schools"  class="nav-link text-decoration-none text-dark fs-4 ms-4">
+  <img src="/static/img/left-arrow.png" class="me-2"  height="20px" width="20px">Schools</a>
+<div class="p-5 container-fluid table-responsive ">
+  <ul class="nav nav-tabs nav-justified mb-3 text-dark " id="ex1" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link tab_heading_color active" id="ex3-tab-1" data-bs-toggle="tab" href="#ex3-tabs-1" role="tab"
+        aria-controls="ex3-tabs-1" aria-selected="true"><b>About Us</b></a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link tab_heading_color" id="ex3-tab-2" data-bs-toggle="tab" href="#ex3-tabs-2" role="tab" aria-controls="ex3-tabs-2"
+        aria-selected="false"><b>Gallery</b></a>
+    </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link tab_heading_color" id="ex3-tab-3" data-bs-toggle="tab" href="#ex3-tabs-3" role="tab" aria-controls="ex3-tabs-3"
+          aria-selected="false"><b>Facilities</b></a>
+      </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link tab_heading_color" id="ex3-tab-4" data-bs-toggle="tab" href="#ex3-tabs-4" role="tab" aria-controls="ex3-tabs-4"
+        aria-selected="false"><b>Fee Structure</b></a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link tab_heading_color" id="ex3-tab-5" data-bs-toggle="tab" href="#ex3-tabs-5" role="tab" aria-controls="ex3-tabs-5"
+        aria-selected="false"><b>Testimonials</b></a>
+    </li>
+  </ul>
+  <div class="tab-content" id="ex2-content">
+    <div class="tab-pane fade show active" id="ex3-tabs-1" role="tabpanel" aria-labelledby="ex3-tab-1">
+        <div class="container-fluid ms-3 mt-5">
+              <div class="col-md-6">
+                  <label for="school_name" class="col-form-label">School Name</label>
+                  <input type="text" class="form-control" id="school_name" value="<%= aboutUsData?aboutUsData.school_name:'' %>"  placeholder="Enter school name">
+              </div>
+          <div class="mt-3 col-md-6">
+            <label for="school_image" class="col-form-label">Upload Image</label>
+            <div class="border upload-box">
+                <div class="raleway-regular upload-imgbox img" id="school_image_preview"
+                    style=" justify-content:center;">
+                    <% if (aboutUsData && aboutUsData.image) { %>
+                      <img src="/<%= aboutUsData.image %>" class="img-fluid" width="200px" height="150">
+                  <% } else { %>
+                     
+                  <% } %>
+                </div>
+                <div> <input type="file" class="form-control" id="school_image">
+                    <div class="text-center">
+                        <label for="school_image" class="col-form-label cursor-pointer"
+                            style=" justify-content:center;">
+                            <img src="/static/img/upload.jpg" class="d-block mx-auto img-fluid" height="50px" width="50px"><b>Click To Upload Image</b>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+              <div class="col-md-6">
+                  <label for="school_description" class="col-form-label">Description</label>
+                  <textarea class="tinymce" id="school_description" rows="10"><%= aboutUsData?aboutUsData.description:'' %></textarea>
+              </div>
+          <div class=" col-md-6 w-90 d-flex justify-content-end mt-2">
+              <button type="submit" id="add_about_us" data-id="<%=aboutUsData?aboutUsData.school_id:''; %>" class="btn btn_bg_color text-white submit-button">Submit</button>
+              <button type="submit"  class="btn btn-success text-white waiting-button d-none">Please Wait</button>
+          </div>
+          </div>
+    </div>
+    <div class="tab-pane fade" id="ex3-tabs-2" role="tabpanel" aria-labelledby="ex3-tab-2">
+      <div class="w-100">
+        <div>
+              <div class="row ms-5 container">
+                  <% for (let i = 0; i < galleryData.length; i++) { %>
+                      <div class="col-md-3 mt-5 row container position-relative">
+                          <img src="/<%= galleryData[i].image; %>" class="img-fluid" width="300px" height="300"> 
+                          <span type="button" data-id="<%=galleryData[i].id; %>" class="btn-close btn-close-white delete_image close-icon  m-3 mt-0" data-bs-dismiss="modal" data-bs-target="#delete-image" aria-label="Close"></span> 
+                      </div>
+                <% } %>
+            
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="delete-image" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete Image</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Are you sure,You want to delete this image
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" id="delete_image">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="ex3-tabs-3" role="tabpanel" aria-labelledby="ex3-tab-3">
+     <!-- Facilities -->
+     <div class="w-100">
+ <table  class="table table-striped table-hover table-bordered mt-5" >
+          <thead class="table_head">
+              <tr class="text-white">
+                  <th scope="col">S.no</th>
+                  <th scope="col">Facility Name</th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Location</th>
+                  <th scope="col">Capacity</th>
+                  <th scope="col">Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              <% for (var i=0; i < facilityData.length; i++) { %>
+                  <tr>
+                      <td>
+                          <%= i+1; %>
+                      </td>
+                      <td>
+                         <a class="text-decoration-none"
+                         href="/admin/facility-details-for-admin/<%= Buffer.from(" facilityData="+facilityData[i].id).toString('base64')%>"
+                         class="nav-link">
+                         <%= facilityData[i].name; %>
+                       </a>
+                      </td>
+                      <td >
+                          <img src="/<%= facilityData[i].image; %>" class="" width="40px" height="40"> 
+                      </td>
+                      <td>
+                          <%= facilityData[i].location; %>
+                      </td>
+                      <td>
+                          <%= facilityData[i].capacity; %>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <a href="/admin/edit-facilities-for-admin/<%= Buffer.from("facilityList="+facilityData[i].id).toString('base64')%>" class="nav-link">
+                            <img src="/static/img/edit.png" class="" width="20px">
+                        </a>
+                                <button type="button" class="btn delete-facilities p-2" data-id="<%= facilityData[i].id; %>" data-bs-toggle="modal" data-bs-target="#delete-facilities">
+                                    <img src="/static/img/trash.png" class="" width="20px">
+                                </button>
+                        </div>
+                    </td>
+                  </tr>
+                  <% } %>
+          </tbody>
+      </table>
+  </div>
+  <!-- Modal -->
+<div class="modal fade" id="delete-facilities" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Facility</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure,You want to delete this facility
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" id="delete_facilities">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+    <div class="tab-pane fade" id="ex3-tabs-4" role="tabpanel" aria-labelledby="ex3-tab-4">
+      <div class="container-fluid ms-5 mt-5">
+            <div class="col-md-6">
+                <label for="title" class="col-form-label">Title</label>
+                <input type="text" class="form-control" id="title" value="<%= feeStructureData?feeStructureData.title:'' %>"  placeholder="Enter title">
+            </div>
+            <div class=" col-md-6">
+                <label for="school_fee" class="col-form-label">Fees</label>
+                <textarea class="tinymce" id="school_fee" rows=""><%= feeStructureData?feeStructureData.fees:'' %></textarea>
+            </div>
+        <div class=" col-md-6 w-90 d-flex justify-content-end alert-success mt-2 ">
+            <button type="submit" id="add_fee_structure" data-id="<%=feeStructureData?feeStructureData.school_id:''; %>" class="btn btn_bg_color text-white submit-button">Submit</button>
+            <button type="submit"  class="btn btn-success text-white waiting-button d-none">Please Wait</button>
+        </div>
+        </div>
+     </div>
+     <div class="tab-pane fade" id="ex3-tabs-5" role="tabpanel" aria-labelledby="ex3-tab-5">
+      <div class="w-100">
+        <table  class="table table-striped table-hover table-bordered mt-5" >
+            <thead class="table_head">
+                <tr class="text-white">
+                    <th scope="col">S.no</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Profile</th>
+                    <th scope="col">Designation</th>
+                    <th scope="col"class="table-width">Description</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (var i=0; i < testimonialData.length; i++) { %>
+                    <tr>
+                        <td>
+                            <%= i+1; %>
+                        </td>
+                        <td>
+                          <a class="text-decoration-none"
+                          href="/admin/testimonials-details-for-admin/<%= Buffer.from(" testimonialData="+testimonialData[i].id).toString('base64')%>"
+                          class="nav-link">
+                          <%= testimonialData[i].name; %>
+                        </a>
+                      </td>
+                        <td >
+                            <img src="/<%= testimonialData[i].profile; %>" class="" width="40px" height="40"> 
+                        </td>
+                        <td>
+                            <%= testimonialData[i].designation; %>
+                        </td>
+                        <td>
+                          <%- unescape(testimonialData[i].description).length > 50 ? unescape(testimonialData[i].description).substring(0, 50) + '...' : unescape(testimonialData[i].description) %>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <a href="/admin/edit-testimonials-for-admin/<%= Buffer.from("testimonilasList="+testimonialData[i].id).toString('base64')%>" class="nav-link">
+                              <img src="/static/img/edit.png" class="" width="20px">
+                          </a>
+                                  <button type="button" class="btn delete-testimonials p-2" data-id="<%= testimonialData[i].id; %>" data-bs-toggle="modal" data-bs-target="#delete-testimonials">
+                                      <img src="/static/img/trash.png" class="" width="20px">
+                                  </button>
+                          </div>
+                      </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+            <!--  Delete Modal -->
+<div class="modal fade" id="delete-testimonials" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Testimonial</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure,You want to delete this testimonial
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" id="delete_testimonials">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+     </div>
+  </div>
+</div>

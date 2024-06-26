@@ -1,0 +1,49 @@
+<script src="/static/js/edit-facilities.js"></script>
+<script src="/static/vendor/tinymce/tinymce.min.js" ></script>
+<% if (token.role===3) { %>
+    <a href="/admin/facilities"  class="nav-link text-decoration-none text-dark fs-4 ms-4">
+        <img src="/static/img/left-arrow.png" class="me-2"  height="20px" width="20px">Edit Facility</a>
+    <%} else { %>
+        <a href="/admin/schools"  class="nav-link text-decoration-none text-dark fs-4 ms-4">
+            <img src="/static/img/left-arrow.png" class="me-2"  height="20px" width="20px">Edit Facility</a>
+    <% } %>
+    <div class="container-fluid ms-3 mt-2">
+            <div class="col-md-6">
+                <label for="facility_name" class="col-form-label">Facility Name</label>
+                <input type="text" class="form-control" id="facility_name" value="<%=facilityList? facilityList.name:'' %>">
+            </div>
+            <div class="mt-3 col-md-6">
+                <label for="facilities_image" class="col-form-label">Upload Image</label>
+                <div class="border upload-box">
+                    <div class="raleway-regular upload-imgbox img" id="facilites_image_preview"
+                        style=" justify-content:center;">
+                        <img src="/<%= facilityList?facilityList.image:''; %>" class="img-fluid" width="200px" height="150">
+                    </div>
+                    <div> <input type="file" class="form-control" id="facilities_image">
+                        <div class="text-center click-image-upload">
+                            <label for="facilities_image" class="col-form-label cursor-pointer"
+                                style=" justify-content:center;">
+                                <img src="/static/img/upload.jpg" class="d-block mx-auto img-fluid" height="50px" width="50px"><b>Click To Upload Image</b>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3 col-md-6">
+                <label for="facilities_description" class="col-form-label">Description</label>
+                <textarea class="tinymce" id="facilities_description" rows="10"><%=facilityList? facilityList.description:'' %></textarea>
+            </div>
+            <div class="mt-3 col-md-6">
+                <label for="location" class="col-form-label">Location</label>
+                <input type="text" class="form-control" id="location" value="<%= facilityList?facilityList.location:'' %>" >
+            </div>
+            <div class="mt-3 col-md-6">
+                <label   for="capacity" class="col-form-label">Capacity</label>
+                <input type="text" class="form-control" id="capacity" value="<%= facilityList?facilityList.capacity:'' %>" >
+            </div>  
+        <div class="w-50 d-flex justify-content-end mt-2  ">
+            <button type="submit" id="edit_facilities"  data-id="<%=facilityList.id; %>" class="btn btn_bg_color text-white submit-button">Update</button>
+            <button type="submit"  class="btn btn-success text-white waiting-button d-none">Please Wait</button>
+        </div>
+        </div>
+  

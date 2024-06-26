@@ -1,0 +1,76 @@
+<script src="/static/js/testimonials.js"></script>
+<script src="/static/vendor/tinymce/tinymce.min.js" ></script>
+<div class="w-100 container-fluid table-responsive">
+    <div class="w-100 d-flex justify-content-end">
+        <button type="button" class="btn btn_bg_color text-white">
+            <a href="/admin/add-testimonials" class="nav-link">
+                <span class="sidebar-text">Add Testimonial</span>
+            </a>
+        </button>
+    </div>
+    <table  class="table table-striped table-hover table-bordered mt-2" >
+        <thead class="table_head">
+            <tr class="text-white">
+                <th scope="col">S.No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Profile</th>
+                <th scope="col">Designation</th>
+                <th scope="col">Description</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody >
+            <% for (var i=0; i < testimonilasList.length; i++) { %>
+                <tr>
+                    <td>
+                        <%= i+1; %>
+                    </td>
+                    <td>
+                        <a class="text-decoration-none"
+                        href="/admin/testimonials-details/<%= Buffer.from(" testimonilasList="+testimonilasList[i].id).toString('base64')%>"
+                        class="nav-link">
+                        <%= testimonilasList[i].name; %>
+                      </a>
+                    </td>
+                    <td >
+                        <img src="/<%= testimonilasList[i].profile; %>" class="" width="40px" height="40"> 
+                    </td>
+                    <td>
+                        <%= testimonilasList[i].designation; %>
+                    </td>
+                    <td>
+                       <%- unescape(testimonilasList[i].description).length > 50 ? unescape(testimonilasList[i].description).substring(0, 50) + '...' : unescape(testimonilasList[i].description) %>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <a href="/admin/edit-testimonials/<%= Buffer.from("testimonilasList="+testimonilasList[i].id).toString('base64')%>" class="nav-link">
+                                <img src="/static/img/edit.png" class="" width="20px">
+                            </a>
+                                <button type="button" class="btn delete-testimonials p-2" data-id="<%= testimonilasList[i].id; %>" data-bs-toggle="modal" data-bs-target="#delete-testimonials">
+                                    <img src="/static/img/trash.png" class="" width="20px">
+                                </button>
+                        </div>
+                    </td>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>
+    <!-- Modal -->
+<div class="modal fade" id="delete-testimonials" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Testimonial</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure,You want to delete this testimonial
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" id="delete_testimonials">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,131 @@
+<script src="/static/js/schools.js"></script>
+<script src="/static/jquery/dataTable.js"></script>
+<link rel="stylesheet" href="/static/css/dataTable.css" />
+<div class="container-fluid table-responsive ms-3 mt-3">
+  <table id="myTable" class="display dataTable">
+  <thead class="table_head">
+    <tr class="text-white">
+      <th scope="col">S.No</th>
+      <th scope="col">School Name</th>
+      <th scope="col">Education Type</th>
+      <th scope="col">Established Date</th>
+      <th scope="col">Email</th>
+      <th scope="col">Mobile</th>
+      <th scope="col">Status</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (var i=0; i < schoolList.length; i++) {
+       let status="" ; if(schoolList[i].status==1){ status="Pending" ; }else
+      if(schoolList[i].status==2){ status="Accept" ; }else if(schoolList[i].status==3){ status="Reject" ; } %>
+      <tr>
+        <td>
+          <%= i+1; %>
+        </td>
+        <td>
+          <% if (schoolList[i].status==2) { %>
+          <a class="text-decoration-none" 
+            href="/admin/school-details/<%= Buffer.from(" schoolList="+schoolList[i].school_id).toString('base64')%>"
+            class="nav-link">
+            <%= schoolList[i].school_name; %>
+          </a>
+          <% }else{ %>
+            <%= schoolList[i].school_name; %>
+            <% } %>
+        </td>
+        <td>
+          <%= schoolList[i].education_type; %>
+        </td>
+        <td>
+          <%= schoolList[i].established_date; %>
+        </td>
+        <td>
+          <%= schoolList[i].email; %>
+        </td>
+        <td>
+          <%= schoolList[i].phone; %>
+        </td>
+        <td>
+          <%= status; %>
+        </td>
+        <td>
+          <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                <path
+                  d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+              </svg>
+            </button>
+            <i id="dropdownMenuButton1" class="bi bi-three-dots-vertical"></i>
+            <ul class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton1">
+              <li><a type="button" class="dropdown-item  btn  p-2 accept_id" data-id="<%=schoolList[i].school_id; %>"
+                  data-bs-toggle="modal" data-bs-target="#accept-school">Accept</a></li>
+              <li><a type="button" class="dropdown-item  btn reject-school p-2 reject_id"
+                  data-id="<%=schoolList[i].school_id; %>" data-bs-toggle="modal"
+                  data-bs-target="#reject-school">Reject</a></li>
+              <li><a type="button" class="dropdown-item  btn delete-school p-2" data-id="<%=schoolList[i].school_id; %>"
+                  data-bs-toggle="modal" data-bs-target="#delete-school">Delete</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+      <% } %>
+  </tbody>
+</table>
+<!-- delete Modal -->
+<div class="modal fade" id="delete-school" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete School</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure,You want to delete this school
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" id="delete_school">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Accept  Modal -->
+<div class="modal fade" id="accept-school" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Accept School</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure,You want to accept this school
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" id="accept_school">Accept</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Reject  Modal -->
+<div class="modal fade" id="reject-school" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reject School</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure,You want to reject this school
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" id="reject_school">Reject</button>
+      </div>
+    </div>
+  </div>
+</div></div>

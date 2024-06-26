@@ -1,0 +1,38 @@
+<script src="/static/js/testimonials.js"></script>
+<script src="/static/vendor/tinymce/tinymce.min.js" ></script>
+<a href="/admin/testimonials"  class="nav-link text-decoration-none text-dark fs-4 ms-4">
+    <img src="/static/img/left-arrow.png" class="me-2"  height="20px" width="20px">Add Testimonial</a>
+<div class="container-fluid ms-3 mt-2">
+            <div class=" col-md-6">
+                <label   for="name" class="col-form-label" >Name</label>
+                <input type="text" class="form-control" id="name"  placeholder="Enter Name">
+            </div> 
+        <div class="mt-3 col-md-6">
+            <label for="testimonials_profile" class="col-form-label">Upload Image</label>
+            <div class="border upload-box ">
+                <div class="raleway-regular upload-imgbox img" id="testimonials_profile_preview"
+                    style=" justify-content:center;">
+                </div>
+                <div> <input type="file" class="form-control" id="testimonials_profile">
+                    <div class="text-center">
+                        <label for="testimonials_profile" class="col-form-label cursor-pointer"
+                            style=" justify-content:center;">
+                            <img src="/static/img/upload.jpg" class="d-block mx-auto" height="50px" width="50px"><b>Click To Upload Image</b>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" mt-3 col-md-6">
+            <label for="designation" class="col-form-label">Designation</label>
+            <input type="text" class="form-control" id="designation" placeholder="Enter designation">
+        </div>
+        <div class="mt-3 col-md-6">
+            <label for="description" class="col-form-label">Description</label>
+            <textarea class="tinymce" id="description" rows="10"></textarea>
+        </div>
+    <div class=" w-50 d-flex justify-content-end mt-2">
+        <button type="submit" id="add_testimonials"  data-id="<%=token.school_id; %>" class="btn btn_bg_color text-white submit-button">Submit</button>
+        <button type="submit" class="btn btn-success text-white waiting-button d-none">Please Wait</button>
+    </div>
+    </div>
